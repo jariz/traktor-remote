@@ -67,7 +67,7 @@ You should see something like:
 ### Option 2: CLI
 
 ```bash
-sudo /path/to/traktor-remote
+/path/to/traktor-remote
 ```
 
 ## Verification
