@@ -70,6 +70,31 @@ You should see something like:
 /path/to/traktor-remote
 ```
 
+You should see something like:
+
+```
+╔══════════════════════════════════╗
+║   Traktor Remote Control - CLI   ║
+╚══════════════════════════════════╝
+
+[*] Searching for Traktor...
+[+] Found: /Applications/Native Instruments/Traktor Pro 4/Traktor Pro 4.app/Contents/MacOS/Traktor Pro 4
+[*] Launching Traktor...
+[+] PID: 78126
+[*] Suspending process...
+[*] Getting task port...
+[+] Task port: 8195
+[*] Enumerating memory regions...
+[+] Found 24 regions (2 executable)
+[*] Scanning for feature_is_on pattern...
+[+] Found feature_is_on at: 0x10103f210
+[+] Patch successful!
+[*] Resuming process...
+[+] Robot server should be enabled on port 8080
+
+[*] Traktor is running. Press Ctrl+C to quit.
+```
+
 ## Verification
 
 Both methods enable the RPC server on port 8080. Test with:

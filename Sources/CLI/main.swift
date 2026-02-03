@@ -36,10 +36,9 @@ func getTaskPort(pid: pid_t) -> mach_port_t? {
 // MARK: - Main
 
 print("""
-    ╔═══════════════════════════════════════════╗
-    ║   Traktor Robot Server Enabler            ║
-    ║   Pattern-scanning memory patcher         ║
-    ╚═══════════════════════════════════════════╝
+    ╔══════════════════════════════════╗
+    ║   Traktor Remote Control - CLI   ║
+    ╚══════════════════════════════════╝
     """)
 
 print("\n[*] Searching for Traktor...")
