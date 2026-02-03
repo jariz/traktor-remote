@@ -28,10 +28,12 @@ jobs:
           zip traktor-remote-arm64.zip traktor-remote
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.sha }}
-          name: Build ${{ github.sha }}
-          files: |
-            artifacts/TraktorRemoteControl-arm64.zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%s)
+          gh release create "${{ github.sha }}" \
+            --title "$COMMIT_MSG" \
+            --notes "Automated build from commit ${{ github.sha }}" \
+            artifacts/TraktorRemoteControl-arm64.zip \
             artifacts/traktor-remote-arm64.zip
