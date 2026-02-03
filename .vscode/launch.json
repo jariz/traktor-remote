@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:robot_enabler}",
+      "name": "Debug robot-enabler",
+      "target": "robot-enabler",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug robot-enabler"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:robot_enabler}",
+      "name": "Release robot-enabler",
+      "target": "robot-enabler",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release robot-enabler"
+    }
+  ]
+}
