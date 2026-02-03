@@ -21,7 +21,8 @@ See [RPC.md](RPC.md) for the full API.
 
 ## Prerequisites
 
-Re-sign Traktor with these entitlements (one-time setup):
+Re-sign Traktor with these entitlements (one-time setup).  
+Open a terminal (e.g. `Terminal.app`) and execute:
 
 ```bash
 cat > /tmp/debug.entitlements << 'EOF'
@@ -42,24 +43,47 @@ sudo codesign -s - -f --entitlements /tmp/debug.entitlements "/Applications/Nati
 
 You'll need to redo this after Traktor updates.
 
-## Build
+## Download
 
-```bash
-swift build -c release
-```
+Grab the latest binaries from [Releases](https://github.com/jariz/traktor-remote/releases):
+
+- `TraktorRemoteControl-arm64.zip` - Dylib (recommended)
+- `traktor-remote-arm64.zip` - CLI tool
 
 ## Usage
 
 ### Option 1: Dylib (recommended)
 
 ```bash
-DYLD_INSERT_LIBRARIES=.build/release/libTraktorRemoteControl.dylib "/Applications/Native Instruments/Traktor Pro 4/Traktor Pro 4.app/Contents/MacOS/Traktor Pro 4"
+DYLD_INSERT_LIBRARIES=/path/to/libTraktorRemoteControl.dylib "/Applications/Native Instruments/Traktor Pro 4/Traktor Pro 4.app/Contents/MacOS/Traktor Pro 4"
+```
+
+You should see something like:
+
+```
+2026-02-03 23:55:55.785 Traktor Pro 4[73355:1425966] [TraktorRemote] Patched feature_is_on at 0x102eeb210 - Robot server enabled on port 8080
 ```
 
 ### Option 2: CLI
 
 ```bash
-sudo .build/release/traktor-remote
+sudo /path/to/traktor-remote
 ```
 
-Both methods enable the RPC server on port 8080.
+## Verification
+
+Both methods enable the RPC server on port 8080. Test with:
+
+```bash
+curl -s http://127.0.0.1:8080 -d '<?xml version="1.0"?><methodCall><methodName>Get Property Double</methodName><params><param><value><string>app.traktor.masterclock.tempo</string></value></param></params></methodCall>'
+```
+
+If you get an XML response, you're all set.
+
+## Building from source (optional)
+
+```bash
+swift build -c release
+```
+
+Binaries will be in `.build/release/`.

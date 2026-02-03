@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          swift build -c release --product TraktorRemoteControl
+          swift build -c release --product traktor-remote
+
+      - name: Prepare artifacts
+        run: |
+          mkdir -p artifacts
+          cp .build/release/libTraktorRemoteControl.dylib artifacts/
+          cp .build/release/traktor-remote artifacts/
+          cd artifacts
+          zip TraktorRemoteControl-arm64.zip libTraktorRemoteControl.dylib
+          zip traktor-remote-arm64.zip traktor-remote
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.sha }}
+          name: Build ${{ github.sha }}
+          files: |
+            artifacts/TraktorRemoteControl-arm64.zip
+            artifacts/traktor-remote-arm64.zip
