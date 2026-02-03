@@ -32,7 +32,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           COMMIT_MSG=$(git log -1 --pretty=%s)
-          gh release create "${{ github.sha }}" \
+          SHORT_SHA=${GITHUB_SHA::7}
+          gh release create "build-$SHORT_SHA" \
             --title "$COMMIT_MSG" \
             --notes "Automated build from commit ${{ github.sha }}" \
             artifacts/TraktorRemoteControl-arm64.zip \
