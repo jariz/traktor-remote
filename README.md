@@ -105,6 +105,10 @@ curl -s http://127.0.0.1:8080 -d '<?xml version="1.0"?><methodCall><methodName>G
 
 If you get an XML response, you're all set.
 
+## Related
+
+- [traktor-overlay](https://github.com/jariz/traktor-overlay) - WebSocket server + browser overlay that shows the currently playing track. Uses this project's RPC server to read deck state from Traktor.
+
 ## Building from source (optional)
 
 ```bash
